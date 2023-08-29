@@ -25,8 +25,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem(); 
-  private Drive drivebase; 
-  private Intake m_intake;
+  private Drive drivebase = new Drive(); 
+  private Intake m_intake = new Intake();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -35,8 +35,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings 
-    drivebase = new Drive();   
-
+    m_intake.reset(); 
+    drivebase.resetEncoders(); 
     drivebase.setDefaultCommand(new DefaultDrive( 
       () -> m_driverController.getLeftY(), 
       () -> m_driverController.getRightX(), 

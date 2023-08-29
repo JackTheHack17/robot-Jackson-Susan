@@ -27,14 +27,13 @@ public class Intake extends SubsystemBase {
     } 
    
     public void startIntake(){   
-        System.out.println("Intake starting!"); 
         rollerMotor.set(ControlMode.PercentOutput,1); 
     } 
     public void endIntake(){  
-        System.out.println("Intake ending!");
         rollerMotor.set(ControlMode.PercentOutput,0); 
     } 
-    public void getObject(){ 
+    public void getObject(){  
+        System.out.println("Intake happening");
         intake1.set(Value.kForward); 
         intake2.set(Value.kForward); 
         startIntake(); 
