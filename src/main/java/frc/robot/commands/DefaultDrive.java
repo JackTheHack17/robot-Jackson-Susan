@@ -20,7 +20,13 @@ public class DefaultDrive extends CommandBase {
     } 
 
     @Override 
-    public void execute(){ 
-        drive.arcadeDrive(speed.getAsDouble(), rotation.getAsDouble()); 
+    public void execute(){  
+        double y = speed.getAsDouble(); 
+        double x = rotation.getAsDouble(); 
+        
+        if (Math.abs(y) <= 0.1) y = 0;  
+        if (Math.abs(x) <= 0.1) x = 0;  
+
+        drive.arcadeDrive(y, x); 
     }
 }

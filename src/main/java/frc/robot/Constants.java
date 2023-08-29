@@ -15,5 +15,14 @@ package frc.robot;
 public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
+  } 
+  public static class DriverConstants { 
+    public static final double kWheelDiameter = 6; 
+    public static final int leftFront = 5; 
+    public static final int rightFront = 6; 
+    public static final int leftBack = 7; 
+    public static final int rightBack = 8;  
+    public static final int encoderChannelA = 0;  
+    public static final int encoderChannelB = 1; 
   }
 }
