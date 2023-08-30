@@ -50,7 +50,9 @@ public class Drive extends SubsystemBase {
     public void arcadeDrive(double speed, double rotation){ 
         drive.arcadeDrive(speed,rotation);
     }
-
+    public void resetEncoders(){ 
+        encoder.reset(); 
+    }
 
 
 }

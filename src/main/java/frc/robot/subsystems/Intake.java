@@ -33,12 +33,13 @@ public class Intake extends SubsystemBase {
         rollerMotor.set(ControlMode.PercentOutput,0); 
     } 
     public void getObject(){  
-        System.out.println("Intake happening");
+        System.out.println("Intake out!");
         intake1.set(Value.kForward); 
         intake2.set(Value.kForward); 
         startIntake(); 
     } 
-    public void retreat(){ 
+    public void retreat(){  
+        System.out.println("Intake in!");
         intake1.set(Value.kReverse);  
         intake2.set(Value.kReverse);  
         endIntake(); 
