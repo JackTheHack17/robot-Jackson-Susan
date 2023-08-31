@@ -26,7 +26,8 @@ public class Drive extends SubsystemBase {
    
     
     
-    public Drive(){ 
+    public Drive(){  
+        
         leftMaster = new WPI_TalonFX(DriverConstants.leftFront); 
         rightMaster = new WPI_TalonFX(DriverConstants.rightFront);  
         leftSlave = new WPI_TalonFX(DriverConstants.leftBack); 
@@ -42,7 +43,7 @@ public class Drive extends SubsystemBase {
         
 
         drive = new DifferentialDrive(leftMaster, rightMaster);   
-        encoder.setDistancePerPulse(circumferenceTicks); 
+        encoder.setDistancePerPulse(circumferenceTicks);  
         
 
     }  
@@ -60,10 +61,16 @@ public class Drive extends SubsystemBase {
     public void resetEncoders(){ 
         encoder.reset(); 
     } 
-    public void driveForward(double setpointFeet){ 
+    public void driveForward(double setpointFeet){  
+        PIDcontrol.setTolerance(3); 
         double actualSet = encoder.getDistance() + setpointFeet;   
-        double error = actualSet - encoder.getDistance();  
-        double output = PIDcontrol.calculate(); 
+        double error = actualSet - encoder.getDistance();    
+        double output = PIDcontrol.calculate(error);   
+        leftMaster.set(-output); 
+        leftSlave.set(-output); 
+        rightMaster.set(output); 
+        rightSlave.set(output);
+
     }
 
 
