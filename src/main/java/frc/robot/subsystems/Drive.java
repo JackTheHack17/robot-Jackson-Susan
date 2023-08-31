@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 //import com.revrobotics.CANSparkMax;
 //import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -15,12 +16,16 @@ public class Drive extends SubsystemBase {
     private  WPI_TalonFX rightMaster; 
     private  WPI_TalonFX leftSlave; 
     private  WPI_TalonFX rightSlave;   
-    private DifferentialDrive drive;  
+    private DifferentialDrive drive;   
+    private ProfiledPIDController PIDcontrol;  
+    
+
     private Encoder encoder = new Encoder(DriverConstants.encoderChannelA,DriverConstants.encoderChannelB);
-    private final double kDriveTicksToFeet = 1.0 / 128 * DriverConstants.kWheelDiameter * Math.PI / 12;  
-    public final double getFeetPos(){ 
-        return encoder.get() * kDriveTicksToFeet; 
-    }
+    private final double circumferenceTicks = (DriverConstants.kWheelDiameter * Math.PI)/4096;
+    
+   
+    
+    
     public Drive(){ 
         leftMaster = new WPI_TalonFX(DriverConstants.leftFront); 
         rightMaster = new WPI_TalonFX(DriverConstants.rightFront);  
@@ -31,18 +36,20 @@ public class Drive extends SubsystemBase {
         rightSlave.follow(rightMaster);   
 
         leftMaster.setInverted(true); 
-        leftSlave.setInverted(true); 
+        leftSlave.setInverted(true);  
+        PIDcontrol = new ProfiledPIDController(DriverConstants.kP,DriverConstants.kI,DriverConstants.kD, null);
 
         
 
-        drive = new DifferentialDrive(leftMaster, rightMaster);  
+        drive = new DifferentialDrive(leftMaster, rightMaster);   
+        encoder.setDistancePerPulse(circumferenceTicks); 
         
 
     }  
 
     @Override 
     public void periodic(){ 
-        SmartDashboard.putNumber("Drive encoder position:",getFeetPos());
+        SmartDashboard.putNumber("Drive encoder position:",encoder.getDistance());
     } 
  
     
@@ -52,6 +59,11 @@ public class Drive extends SubsystemBase {
     }
     public void resetEncoders(){ 
         encoder.reset(); 
+    } 
+    public void driveForward(double setpointFeet){ 
+        double actualSet = encoder.getDistance() + setpointFeet;   
+        double error = actualSet - encoder.getDistance();  
+        double output = PIDcontrol.calculate(); 
     }
 
 
