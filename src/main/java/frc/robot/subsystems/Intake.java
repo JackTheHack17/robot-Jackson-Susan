@@ -17,10 +17,10 @@ public class Intake extends SubsystemBase {
     private Compressor compressor;
     
     public Intake(){ 
-        intake1 = new DoubleSolenoid(PneumaticsModuleType.REVPH,1,2); 
-        rollerMotor = new TalonSRX(7); 
-        intake2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 3, 4); 
-        compressor = new Compressor(PneumaticsModuleType.REVPH);  
+        intake1 = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM,1,3); 
+        rollerMotor = new TalonSRX(16); 
+        intake2 = new DoubleSolenoid(1,PneumaticsModuleType.CTREPCM, 3, 4); 
+        compressor = new Compressor(PneumaticsModuleType.CTREPCM);  
         compressor.enableDigital();  
         
         

@@ -63,13 +63,9 @@ public class Drive extends SubsystemBase {
     } 
     public void driveForward(double setpointFeet){  
         PIDcontrol.setTolerance(3); 
-        double actualSet = encoder.getDistance() + setpointFeet;   
-        double error = actualSet - encoder.getDistance();    
-        double output = PIDcontrol.calculate(error);   
-        leftMaster.set(-output); 
-        leftSlave.set(-output); 
-        rightMaster.set(output); 
-        rightSlave.set(output);
+        double actualSet = encoder.getDistance() + setpointFeet;       
+        double output = PIDcontrol.calculate(encoder.getDistance(), actualSet);   
+        arcadeDrive(output,0); 
 
     }
 

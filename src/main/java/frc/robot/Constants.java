@@ -18,11 +18,33 @@ public final class Constants {
   } 
   public static class DriverConstants { 
     public static final double kWheelDiameter = 6; 
-    public static final int leftFront = 5; 
-    public static final int rightFront = 6; 
-    public static final int leftBack = 7; 
-    public static final int rightBack = 8;  
+    public static final int leftFront = 11; 
+    public static final int rightFront = 10; 
+    public static final int leftBack = 13; 
+    public static final int rightBack = 12;  
     public static final int encoderChannelA = 0;  
-    public static final int encoderChannelB = 1; 
-  }
+    public static final int encoderChannelB = 1;  
+    public static final double gearRatio = 22.755; 
+    public static final double tBD = 32.75;  
+    public static final double kP = 0.01; 
+    public static final double kI = 0.001; 
+    public static final double kD = 0.3; 
+  } 
+  public static class ShooterConstants { 
+    public static final int leftShootPort = 15; 
+    public static final int rightShootPort = 14; 
+    public static final int hoodPort = 18; 
+    public static final int hoodSpeed = 1; 
+  } 
+
+  public static class PrimerConstants { 
+    public static int hopperPort = 22; 
+    public static int intakePort = 17; 
+    public static double hopperSpeed = 0.5; 
+    public static int intakeSpeed = 1;
+  }  
+
+  
+
+  
 }

@@ -27,6 +27,7 @@ public class DefaultDrive extends CommandBase {
         if (Math.abs(y) <= 0.1) y = 0;  
         if (Math.abs(x) <= 0.1) x = 0;  
 
-        drive.arcadeDrive(y, x); 
+        drive.arcadeDrive(y, x);  
+        
     }
 }

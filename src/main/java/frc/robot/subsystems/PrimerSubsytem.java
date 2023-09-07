@@ -9,12 +9,10 @@ import frc.robot.Constants.PrimerConstants;
 
 public class PrimerSubsytem extends SubsystemBase{
     private WPI_TalonSRX hopper;   
-    private WPI_TalonSRX cargoIntake; 
-    public boolean shouldRun; 
+    private WPI_TalonSRX cargoIntake;  
     public PrimerSubsytem(){ 
        hopper = new WPI_TalonSRX(PrimerConstants.hopperPort); 
-       cargoIntake = new WPI_TalonSRX(PrimerConstants.intakePort); 
-       shouldRun = false;  
+       cargoIntake = new WPI_TalonSRX(PrimerConstants.intakePort);   
        configMotors(); 
        cargoIntake.setInverted(true);
     } 
@@ -28,27 +26,29 @@ public class PrimerSubsytem extends SubsystemBase{
 
     } 
 
-    public void stopAll(){ 
+    public void reset(){ 
         hopper.set(0); 
         cargoIntake.set(0); 
     } 
-    public void runHopper(boolean reversed){  
-        if (reversed == true){  
+    public void runHopper(){    
           hopper.set(PrimerConstants.hopperSpeed); 
-        } else { 
-            hopper.set(-PrimerConstants.hopperSpeed); 
-        }   
+    } 
+    public void runBackwardHopper(){ 
+        hopper.set(-PrimerConstants.hopperSpeed);
     }
     public void stopHopper(){ 
         hopper.set(0); 
     }  
-    public void startCargIntake(){ 
+    public void reload(){ 
         cargoIntake.set(1); 
-    } 
+    }  
+    public void drop(){ 
+        cargoIntake.set(-1); 
+    }
     public void stopCargIntake(){ 
         cargoIntake.set(0); 
     } 
-    public void throw (){ 
+    public void throwBall(){ 
         cargoIntake.set(-1); 
     } 
 
